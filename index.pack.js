@@ -384,48 +384,7 @@ if (process.env.NODE_ENV === 'production') {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.default = App;
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Header = __webpack_require__(6);
-
-var _Header2 = _interopRequireDefault(_Header);
-
-var _Meme = __webpack_require__(7);
-
-var _Meme2 = _interopRequireDefault(_Meme);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * Challenge: 
- * - Create a Meme component.
- * - Inside the Meme component, render a styled form
- *   with our 2 inputs and the button.
- * - Don't worry about adding any functionality yet
- */
-function App() {
-    return _react2.default.createElement(
-        "div",
-        null,
-        _react2.default.createElement(_Header2.default, null),
-        _react2.default.createElement(_Meme2.default, null)
-    );
-}
-
-/***/ }),
+/* 4 */,
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -472,166 +431,8 @@ if (process.env.NODE_ENV === 'production') {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.default = Header;
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function Header() {
-    return _react2.default.createElement(
-        "header",
-        { className: "header" },
-        _react2.default.createElement("img", {
-            src: "./images/troll-face.png",
-            className: "header--image"
-        }),
-        _react2.default.createElement(
-            "h2",
-            { className: "header--title" },
-            "Meme Generator"
-        ),
-        _react2.default.createElement(
-            "h4",
-            { className: "header--project" },
-            "React Course - Project 3"
-        )
-    );
-}
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
-exports.default = Meme;
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function Meme() {
-    var _React$useState = _react2.default.useState({
-        topText: "",
-        bottomText: "",
-        randomImage: "http://i.imgflip.com/1bij.jpg"
-    }),
-        _React$useState2 = _slicedToArray(_React$useState, 2),
-        meme = _React$useState2[0],
-        setMeme = _React$useState2[1];
-
-    var _React$useState3 = _react2.default.useState([]),
-        _React$useState4 = _slicedToArray(_React$useState3, 2),
-        allMemes = _React$useState4[0],
-        setAllMemes = _React$useState4[1];
-
-    _react2.default.useEffect(function () {
-        fetch("https://api.imgflip.com/get_memes").then(function (res) {
-            return res.json();
-        }).then(function (data) {
-            return setAllMemes(data.data.memes);
-        });
-    }, []);
-
-    function getMemeImage() {
-        var randomNumber = Math.floor(Math.random() * allMemes.length);
-        var url = allMemes[randomNumber].url;
-        setMeme(function (prevMeme) {
-            return {
-                topText: prevMeme.topText,
-                bottomText: prevMeme.bottomText,
-                randomImage: url
-            };
-        });
-    }
-
-    function handleChange(event) {
-        var _event$target = event.target,
-            name = _event$target.name,
-            value = _event$target.value;
-
-        setMeme(function (prevMeme) {
-            return _defineProperty({
-                topText: prevMeme.topText,
-                bottomText: prevMeme.bottomText,
-                randomImage: prevMeme.randomImage
-            }, name, value);
-        });
-    }
-
-    return _react2.default.createElement(
-        "main",
-        null,
-        _react2.default.createElement(
-            "div",
-            { className: "form" },
-            _react2.default.createElement("input", {
-                type: "text",
-                placeholder: "Top text",
-                className: "form--input",
-                name: "topText",
-                value: meme.topText,
-                onChange: handleChange
-            }),
-            _react2.default.createElement("input", {
-                type: "text",
-                placeholder: "Bottom text",
-                className: "form--input",
-                name: "bottomText",
-                value: meme.bottomText,
-                onChange: handleChange
-            }),
-            _react2.default.createElement(
-                "button",
-                {
-                    className: "form--button",
-                    onClick: getMemeImage
-                },
-                "Get a new meme image \uD83D\uDDBC"
-            )
-        ),
-        _react2.default.createElement(
-            "div",
-            { className: "meme" },
-            _react2.default.createElement("img", { src: meme.randomImage, className: "meme--image" }),
-            _react2.default.createElement(
-                "h2",
-                { className: "meme--text top" },
-                meme.topText
-            ),
-            _react2.default.createElement(
-                "h2",
-                { className: "meme--text bottom" },
-                meme.bottomText
-            )
-        )
-    );
-}
-
-/***/ }),
+/* 6 */,
+/* 7 */,
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -646,7 +447,7 @@ var _reactDom = __webpack_require__(5);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _App = __webpack_require__(4);
+var _App = __webpack_require__(18);
 
 var _App2 = _interopRequireDefault(_App);
 
@@ -30665,6 +30466,208 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = App;
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Header = __webpack_require__(19);
+
+var _Header2 = _interopRequireDefault(_Header);
+
+var _Meme = __webpack_require__(20);
+
+var _Meme2 = _interopRequireDefault(_Meme);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * Challenge: 
+ * - Create a Meme component.
+ * - Inside the Meme component, render a styled form
+ *   with our 2 inputs and the button.
+ * - Don't worry about adding any functionality yet
+ */
+function App() {
+    return _react2.default.createElement(
+        "div",
+        null,
+        _react2.default.createElement(_Header2.default, null),
+        _react2.default.createElement(_Meme2.default, null)
+    );
+}
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = Header;
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function Header() {
+    return _react2.default.createElement(
+        "header",
+        { className: "header" },
+        _react2.default.createElement("img", {
+            src: "src/images/troll-face.png",
+            className: "header--image"
+        }),
+        _react2.default.createElement(
+            "h2",
+            { className: "header--title" },
+            "Meme Generator"
+        ),
+        _react2.default.createElement(
+            "h4",
+            { className: "header--project" },
+            "React Course - Project 3"
+        )
+    );
+}
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+exports.default = Meme;
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function Meme() {
+    var _React$useState = _react2.default.useState({
+        topText: "",
+        bottomText: "",
+        randomImage: "http://i.imgflip.com/1bij.jpg"
+    }),
+        _React$useState2 = _slicedToArray(_React$useState, 2),
+        meme = _React$useState2[0],
+        setMeme = _React$useState2[1];
+
+    var _React$useState3 = _react2.default.useState([]),
+        _React$useState4 = _slicedToArray(_React$useState3, 2),
+        allMemes = _React$useState4[0],
+        setAllMemes = _React$useState4[1];
+
+    _react2.default.useEffect(function () {
+        fetch("https://api.imgflip.com/get_memes").then(function (res) {
+            return res.json();
+        }).then(function (data) {
+            return setAllMemes(data.data.memes);
+        });
+    }, []);
+
+    function getMemeImage() {
+        var randomNumber = Math.floor(Math.random() * allMemes.length);
+        var url = allMemes[randomNumber].url;
+        setMeme(function (prevMeme) {
+            return {
+                topText: prevMeme.topText,
+                bottomText: prevMeme.bottomText,
+                randomImage: url
+            };
+        });
+    }
+
+    function handleChange(event) {
+        var _event$target = event.target,
+            name = _event$target.name,
+            value = _event$target.value;
+
+        setMeme(function (prevMeme) {
+            return _defineProperty({
+                topText: prevMeme.topText,
+                bottomText: prevMeme.bottomText,
+                randomImage: prevMeme.randomImage
+            }, name, value);
+        });
+    }
+
+    return _react2.default.createElement(
+        "main",
+        null,
+        _react2.default.createElement(
+            "div",
+            { className: "form" },
+            _react2.default.createElement("input", {
+                type: "text",
+                placeholder: "Top text",
+                className: "form--input",
+                name: "topText",
+                value: meme.topText,
+                onChange: handleChange
+            }),
+            _react2.default.createElement("input", {
+                type: "text",
+                placeholder: "Bottom text",
+                className: "form--input",
+                name: "bottomText",
+                value: meme.bottomText,
+                onChange: handleChange
+            }),
+            _react2.default.createElement(
+                "button",
+                {
+                    className: "form--button",
+                    onClick: getMemeImage
+                },
+                "Get a new meme image \uD83D\uDDBC"
+            )
+        ),
+        _react2.default.createElement(
+            "div",
+            { className: "meme" },
+            _react2.default.createElement("img", { src: meme.randomImage, className: "meme--image" }),
+            _react2.default.createElement(
+                "h2",
+                { className: "meme--text top" },
+                meme.topText
+            ),
+            _react2.default.createElement(
+                "h2",
+                { className: "meme--text bottom" },
+                meme.bottomText
+            )
+        )
+    );
+}
 
 /***/ })
 /******/ ]);
